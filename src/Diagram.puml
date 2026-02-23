@@ -1,0 +1,71 @@
+@startuml
+
+' *** controlers ***
+class UserController{
++niewueUser()
++getUser()
+}
+
+class BelastingController{
++belastingBerekenen()
++getBelasting
+}
+
+'-----------------
+
+
+
+' *** Services ***
+class UserService{
+}
+
+class BelastingService{
+}
+
+'-----------------
+
+
+
+' *** models ***
+interface User{
++id
++name
++email
++password
++rol
+}
+
+class Admin{
+}
+class GewoneUser{
++belastingen
+}
+
+class Belasting{
+-id
+-income
+-finaleBelasting
+}
+
+'-----------------
+
+
+' *** DataBase ***
+package DataBase{}
+
+' *** Relations ***
+User--|>GewoneUser
+User--|>Admin
+
+GewoneUser o-- Belasting
+
+UserController-->UserService
+BelastingController-->BelastingService
+
+UserService..>User
+BelastingService..>Belasting
+
+UserService-->DataBase
+BelastingService-->DataBase
+
+@enduml
