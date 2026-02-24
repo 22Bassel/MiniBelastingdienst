@@ -1,7 +1,7 @@
 package com.example.demo.models.Users;
 
 public abstract class User {
-    int id=0;
+    Long id= 0L;
     String name="";
     String email="";
     String password="";
@@ -9,4 +9,23 @@ public abstract class User {
 
     public abstract void isAdmin();
 
+    public Boolean getRol() {
+        return rol;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
