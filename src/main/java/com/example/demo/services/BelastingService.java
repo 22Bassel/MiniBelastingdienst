@@ -18,12 +18,6 @@ public class BelastingService {
     public List<Belasting> NieuweInkomenBelastingToevoegen(Long id,double inkomen,int jaar){
      GewoneUser user= (GewoneUser) database.UserOphalenMetID(id);
 
-     // al in Database in dit jaar
-     for(Belasting belasting : (ArrayList<Belasting>) user.getBelastingListMetJaar(jaar))
-         if(belasting.getBelastingsoort().equals("inkomen")){
-             return null;
-         }
-
      user.nieuweBelastingMetJaar(nieuweBelastingmaken("inkomen",id,inkomen,jaar));
 
      database.UserBijwerken(user);
@@ -41,6 +35,19 @@ public class BelastingService {
         }
 
         return new Belasting(id,soort,jaar,inkomen,belastingbedrag);
+    }
+
+
+    public boolean BestaatAlInkomenBelasting(Long id,int jaar) {
+        GewoneUser user = (GewoneUser) database.UserOphalenMetID(id);
+
+        // al in Database in dit jaar
+        for (Belasting belasting : (ArrayList<Belasting>) user.getBelastingListMetJaar(jaar))
+            if (belasting.getBelastingsoort().equals("inkomen")) {
+                return true;
+            }
+
+        return false;
     }
     }
 
