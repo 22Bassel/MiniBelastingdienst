@@ -14,5 +14,6 @@ public class Database {
     public User UserOphalenMetID(Long id){return new GewoneUser(id,"a","a@gmail.com","hi");};
 
     public User UserBijwerken(User user){return user;}
+    public boolean Emailzoeken(String email){return false;}
 
 }

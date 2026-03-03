@@ -12,6 +12,9 @@ public class UserController {
 
     @PostMapping("/User")
     public User niewueUser(@RequestBody User NieweUser){
+        if(userService.BestaatAlEmail(NieweUser.getEmail())){
+            throw new IllegalStateException("Er bestaat al deze email");
+        }
         return userService.niewueUser(NieweUser);
     }
 
