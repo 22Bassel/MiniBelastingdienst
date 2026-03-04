@@ -3,8 +3,7 @@ package com.example.demo.services;
 import com.example.demo.database.Database;
 import com.example.demo.models.Belasting;
 import com.example.demo.models.Users.GewoneUser;
-import com.example.demo.services.Belastingberekenen.Belastingberekenen;
-import com.example.demo.services.Belastingberekenen.Inkomenbelastingberekenen;
+import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

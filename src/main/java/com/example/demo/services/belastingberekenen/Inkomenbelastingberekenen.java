@@ -1,4 +1,4 @@
-package com.example.demo.services.Belastingberekenen;
+package com.example.demo.services.belastingberekenen;
 
 public class Inkomenbelastingberekenen implements Belastingberekenen {
     @Override
