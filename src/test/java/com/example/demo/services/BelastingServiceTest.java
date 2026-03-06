@@ -56,7 +56,7 @@ public class BelastingServiceTest {
 
 
     @Test
-    public void testBestaatAlInkomenBelasting_WanneerGeenBelastingen() {
+    public void testBestondAlInkomenBelasting_WanneerGeenBelastingen() {
         // Test data
         Long userId = 1L;
         int jaar = 2023;
@@ -66,7 +66,7 @@ public class BelastingServiceTest {
         when(gewoneUser.getBelastingListMetJaar(jaar)).thenReturn(new ArrayList<>());
 
         // Act
-        boolean result = belastingService.BestaatAlInkomenBelasting(userId, jaar);
+        boolean result = belastingService.BestondAlInkomenBelasting(userId, jaar);
 
         // Assert
         assertFalse(result);

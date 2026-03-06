@@ -73,7 +73,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testBestaatAlEmail_EmailExists() {
+    public void testBestondAlDitEmail_EmailExists() {
         // Test data
         String email = "existing@example.com";
 
@@ -81,7 +81,7 @@ public class UserServiceTest {
         when(database.Emailzoeken(email)).thenReturn(true);
 
         // Act
-        boolean result = userService.BestaatAlEmail(email);
+        boolean result = userService.BestondAlDitEmail(email);
 
         // Assert
         assertTrue(result);
@@ -89,7 +89,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testBestaatAlEmail_EmailDoesNotExist() {
+    public void testBestondAlDitEmail_EmailDoesNotExist() {
         // Test data
         String email = "new@example.com";
 
@@ -97,7 +97,7 @@ public class UserServiceTest {
         when(database.Emailzoeken(email)).thenReturn(false);
 
         // Act
-        boolean result = userService.BestaatAlEmail(email);
+        boolean result = userService.BestondAlDitEmail(email);
 
         // Assert
         assertFalse(result);

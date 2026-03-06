@@ -37,7 +37,7 @@ public class BelastingService {
     }
 
 
-    public boolean BestaatAlInkomenBelasting(Long id,int jaar) {
+    public boolean BestondAlInkomenBelasting(Long id, int jaar) {
         GewoneUser user = (GewoneUser) database.UserOphalenMetID(id);
 
         // al in Database in dit jaar

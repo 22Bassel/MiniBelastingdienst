@@ -8,9 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +27,7 @@ public class BelastingControllerTest {
 
     @Test
     public void NieuweInkomenBelastingTest(){ // Inkomen belasting bestaat al een
-        Mockito.when(belastingService.BestaatAlInkomenBelasting(anyLong(),anyInt()))
+        Mockito.when(belastingService.BestondAlInkomenBelasting(anyLong(),anyInt()))
                .thenReturn(true);
 
         IllegalStateException exception=assertThrows(IllegalStateException.class,()->
@@ -46,7 +43,7 @@ public class BelastingControllerTest {
        List<Belasting> list=new ArrayList<>();
        list.add(new Belasting(111L,"inkomen",2026,200000.0,2000.0));
 
-        Mockito.when(belastingService.BestaatAlInkomenBelasting(anyLong(),anyInt()))
+        Mockito.when(belastingService.BestondAlInkomenBelasting(anyLong(),anyInt()))
                 .thenReturn(false);
         Mockito.when(belastingService.NieuweInkomenBelastingToevoegen(111L,200000.0,2026))
                 .thenReturn(list);

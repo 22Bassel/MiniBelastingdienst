@@ -1,11 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.database.Database;
-import com.example.demo.models.Belasting;
-import com.example.demo.models.Users.GewoneUser;
 import com.example.demo.models.Users.User;
-
-import java.util.ArrayList;
 
 @org.springframework.stereotype.Service
 public class UserService {
@@ -22,7 +18,7 @@ public class UserService {
     }
 
 
-    public boolean BestaatAlEmail(String email) {
+    public boolean BestondAlDitEmail(String email) {
         return database.Emailzoeken(email);
     }
 }

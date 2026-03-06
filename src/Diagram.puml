@@ -7,8 +7,7 @@ class UserController{
 }
 
 class BelastingController{
-+belastingBerekenen()
-+getBelasting
++NieuweInkomenBelasting()
 }
 
 '-----------------
@@ -17,11 +16,25 @@ class BelastingController{
 
 ' *** Services ***
 class UserService{
++niewueUser()
++GetUser()
++BestaatAlEmail()
 }
 
 class BelastingService{
++NieuweInkomenBelastingToevoegen()
+-nieuweBelastingmaken()
++BestaatAlInkomenBelasting
 }
 
+'*** package belastingbereken ***
+interface Belastingbereken{
+berekenen()
+}
+
+class Inkomenbelastingberekenen{
+berekenen()
+}
 '-----------------
 
 
@@ -32,19 +45,28 @@ interface User{
 +name
 +email
 +password
-+rol
++isAdmin
+
 }
 
 class Admin{
 }
+
 class GewoneUser{
-+belastingen
+  -belastingenPerJaar:Map<Integer,List<Belasting>>
+
+  +nieuweBelastingMetJaar()
+  +getBelastingListMetJaar()
+  +setBelastingToevoegen()
+
 }
 
 class Belasting{
--id
--income
--finaleBelasting
+ -userid;
+ -belastingsoort;
+ -belastingJaar;
+ -inkomem;
+ -belastingBedrag;
 }
 
 '-----------------
@@ -57,13 +79,16 @@ package DataBase{}
 User--|>GewoneUser
 User--|>Admin
 
-GewoneUser o-- Belasting
+GewoneUser "1" -- "1..*" Belasting : bevat
 
 UserController-->UserService
 BelastingController-->BelastingService
 
 UserService..>User
 BelastingService..>Belasting
+
+Belastingbereken..|>Inkomenbelastingberekenen
+BelastingService-->Belastingbereken
 
 UserService-->DataBase
 BelastingService-->DataBase

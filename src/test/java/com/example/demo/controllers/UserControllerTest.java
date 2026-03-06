@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Belasting;
 import com.example.demo.models.Users.GewoneUser;
 import com.example.demo.models.Users.User;
-import com.example.demo.services.BelastingService;
 import com.example.demo.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,9 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,7 +28,7 @@ public class UserControllerTest {
 
         User user=new GewoneUser(1L,"a","b@gmail.com","c");
 
-        Mockito.when(userService.BestaatAlEmail(anyString()))
+        Mockito.when(userService.BestondAlDitEmail(anyString()))
                .thenReturn(true);
 
         IllegalStateException exception=assertThrows(IllegalStateException.class,()->
@@ -49,7 +44,7 @@ public class UserControllerTest {
 
         User user=new GewoneUser(1L,"a","b@gmail.com","c");
 
-        Mockito.when(userService.BestaatAlEmail(anyString()))
+        Mockito.when(userService.BestondAlDitEmail(anyString()))
                 .thenReturn(false);
 
         Mockito.when(userService.niewueUser(user))
