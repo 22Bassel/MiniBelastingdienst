@@ -5,12 +5,12 @@ public abstract class User {
     String name="";
     String email="";
     String password="";
-    Boolean rol=false ; // false: Gewone User, true: Admin
+    Boolean isAdmin=false ; // false: Gewone User, true: Admin
 
     public abstract void isAdmin();
 
-    public Boolean getRol() {
-        return rol;
+    public Boolean getisAdmin() {
+        return isAdmin;
     }
 
     public Long getId() {

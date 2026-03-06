@@ -8,7 +8,7 @@ public class Database {
 
 
     public User UserToevoegen(User user){
-        if(user.getRol())return new Admin(user.getId(), user.getName(), user.getEmail(), user.getPassword());
+        if(user.getisAdmin())return new Admin(user.getId(), user.getName(), user.getEmail(), user.getPassword());
         return new GewoneUser(user.getId(), user.getName(), user.getEmail(), user.getPassword());
     }
     public User UserOphalenMetID(Long id){return new GewoneUser(id,"a","a@gmail.com","hi");};

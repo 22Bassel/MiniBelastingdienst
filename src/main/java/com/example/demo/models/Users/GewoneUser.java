@@ -35,7 +35,7 @@ public class GewoneUser extends User {
         else{
             List<Belasting> list=new ArrayList<Belasting>();
             list.add(belasting);
-            belastingMap.put(belasting.getBelastingJaar(),list );
+            belastingMap.put(belasting.getBelastingJaar(),list);
         }
     }
 
@@ -45,6 +45,6 @@ public class GewoneUser extends User {
 
     @Override
     public void isAdmin() {
-        rol=false;
+        isAdmin=false;
     }
 }
