@@ -15,7 +15,7 @@ public class Admin extends User{
 
     @Override
     public void isAdmin() {
-        rol=true;
+        isAdmin=true;
     }
 
 

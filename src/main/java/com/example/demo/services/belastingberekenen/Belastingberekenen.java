@@ -1,4 +1,4 @@
-package com.example.demo.services.Belastingberekenen;
+package com.example.demo.services.belastingberekenen;
 
 public interface Belastingberekenen {
     double berekenen(double geld);
