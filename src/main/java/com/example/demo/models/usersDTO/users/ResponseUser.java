@@ -23,8 +23,8 @@ public class ResponseUser {
     public static ResponseUser NaarDTO(UserEntity user){
         return ResponseUser.builder()
                 .id(user.getId())
-                .voorName(user.getVoorName())
-                .achterName(user.getAchterName())
+                .voorName(user.getVoorNaam())
+                .achterName(user.getAchterNaam())
                 .email(user.getEmail())
                 .isAdmin(user.getIsAdmin())
                 .belastingen(Optional.ofNullable(user.getBelastingen())

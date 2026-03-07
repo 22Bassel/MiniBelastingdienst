@@ -18,7 +18,7 @@ public class ResponseBelasting {
         return ResponseBelasting.builder()
                 .belastingsoort(belasting.getBelastingsoort())
                 .belastingJaar(belasting.getBelastingJaar())
-                .inkomem(belasting.getInkomem())
+                .inkomem(belasting.getInkomen())
                 .belastingBedrag(belasting.getBelastingBedrag())
                 .build();
     }

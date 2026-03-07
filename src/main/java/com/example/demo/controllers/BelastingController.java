@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Belasting;
+
 import com.example.demo.services.BelastingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

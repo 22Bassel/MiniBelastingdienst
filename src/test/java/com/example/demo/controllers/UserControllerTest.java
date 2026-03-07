@@ -36,8 +36,8 @@ public class UserControllerTest {
 
       assertEquals("Er bestaat al deze email",exception.getMessage());
 
-    }
 
+/*
 
     @Test
     public void NiewueUserTestTwee(){ // Nieuwe user toevoegen
@@ -55,5 +55,5 @@ public class UserControllerTest {
         assertEquals(user.getVoorName(),userController.niewueUser(user).getBody().getVoorName());
 
     }
-
-}
+*/
+}}

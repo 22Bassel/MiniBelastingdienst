@@ -1,12 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.database.BelastingRepo;
-import com.example.demo.database.Database;
 import com.example.demo.database.UserRepo;
-import com.example.demo.models.Belasting;
 import com.example.demo.models.entities.BelastingEntity;
 import com.example.demo.models.entities.UserEntity;
-import com.example.demo.models.usersDTO.GewoneUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
 import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
@@ -50,7 +47,7 @@ public class BelastingService {
         BelastingEntity belasting=new BelastingEntity();
         belasting.setBelastingBedrag(belastingbedrag);
         belasting.setBelastingJaar(jaar);
-        belasting.setInkomem(inkomen);
+        belasting.setInkomen(inkomen);
         belasting.setBelastingsoort(soort);
 
         return belasting;

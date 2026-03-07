@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name ="Belastingen")
+@Table(name ="BELASTINGEN")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,15 +17,15 @@ public class BelastingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "USERID")
     private UserEntity user;
-    @Column(name = "belastingsoort")
+    @Column(name = "BELASTINGSOORT")
     private String belastingsoort; // inkomen, onroerendezaak, dividend
-    @Column(name = "belastingJaar")
+    @Column(name = "BELASTINGJAAR")
     private int belastingJaar;
-    @Column(name = "inkomem")
-    private double inkomem;
-    @Column(name = "belastingBedrag")
+    @Column(name = "INKOMEN")
+    private double inkomen;
+    @Column(name = "BELASTINGBEDRAG")
     private double belastingBedrag;
 
     public static BelastingEntity vanDTO(RequestNieuweBelasting belasting,UserEntity user){
@@ -33,7 +33,7 @@ public class BelastingEntity {
                 .user(user)
                 .belastingsoort(belasting.getBelastingsoort())
                 .belastingJaar(belasting.getBelastingJaar())
-                .inkomem(belasting.getInkomem())
+                .inkomen(belasting.getInkomem())
                 .belastingBedrag(belasting.getBelastingBedrag())
                 .build();
     }

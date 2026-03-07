@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name ="Users")
+@Table(name ="USERS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,23 +18,23 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "voorName")
-    private String voorName;
-    @Column(name = "achterName")
-    private String achterName;
-    @Column(name = "email")
+    @Column(name = "VOORNAAM")
+    private String voorNaam;
+    @Column(name = "ACHTERNAAM")
+    private String achterNaam;
+    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "isAdmin")
+    @Column(name = "ISADMIN")
     private Boolean isAdmin;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BelastingEntity> belastingen=new ArrayList<>();
 
     public static UserEntity vanDto(RequestNieuweUser user){
         return UserEntity.builder()
-                .voorName(user.getVoorName())
-                .achterName(user.getAchterName())
+                .voorNaam(user.getVoorName())
+                .achterNaam(user.getAchterName())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .isAdmin(user.getIsAdmin())
