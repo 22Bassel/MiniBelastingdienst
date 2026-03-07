@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Users.GewoneUser;
-import com.example.demo.models.Users.User;
+import com.example.demo.models.UsersDTO.GewoneUser;
+import com.example.demo.models.UsersDTO.RequestNieuweUser;
+import com.example.demo.models.UsersDTO.ResponseUser;
+import com.example.demo.models.UsersDTO.User;
 import com.example.demo.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +28,7 @@ public class UserControllerTest {
     @Test
     public void NiewueUserTest(){ // de email adres is al in database
 
-        User user=new GewoneUser(1L,"a","b@gmail.com","c");
+        RequestNieuweUser user=new RequestNieuweUser("a","b","b@gmail.com","c",false);
 
         Mockito.when(userService.BestondAlDitEmail(anyString()))
                .thenReturn(true);
@@ -42,15 +44,17 @@ public class UserControllerTest {
     @Test
     public void NiewueUserTestTwee(){ // Nieuwe user toevoegen
 
-        User user=new GewoneUser(1L,"a","b@gmail.com","c");
+
+        RequestNieuweUser user=new RequestNieuweUser("a","b","b@gmail.com","c",false);
+        ResponseUser user2=new ResponseUser(1L,"a","b","b@gmail.com",false);
 
         Mockito.when(userService.BestondAlDitEmail(anyString()))
                 .thenReturn(false);
 
         Mockito.when(userService.niewueUser(user))
-                .thenReturn(user);
+                .thenReturn(user2);
 
-        assertEquals(user.getName(),userController.niewueUser(user).getName());
+        assertEquals(user.getVoorName(),userController.niewueUser(user).getVoorName());
 
     }
 

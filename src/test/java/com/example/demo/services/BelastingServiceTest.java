@@ -2,7 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.database.Database;
 import com.example.demo.models.Belasting;
-import com.example.demo.models.Users.GewoneUser;
+import com.example.demo.models.UsersDTO.GewoneUser;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

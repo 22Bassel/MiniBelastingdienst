@@ -1,8 +1,8 @@
 package com.example.demo.database;
 
-import com.example.demo.models.Users.Admin;
-import com.example.demo.models.Users.GewoneUser;
-import com.example.demo.models.Users.User;
+import com.example.demo.models.UsersDTO.Admin;
+import com.example.demo.models.UsersDTO.GewoneUser;
+import com.example.demo.models.UsersDTO.User;
 
 public class Database {
 

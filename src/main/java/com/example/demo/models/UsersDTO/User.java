@@ -1,4 +1,6 @@
-package com.example.demo.models.Users;
+package com.example.demo.models.UsersDTO;
+
+
 
 public abstract class User {
     Long id= 0L;

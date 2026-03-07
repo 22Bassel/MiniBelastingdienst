@@ -1,4 +1,4 @@
-package com.example.demo.models.Users;
+package com.example.demo.models.UsersDTO;
 
 
 import com.example.demo.models.Belasting;

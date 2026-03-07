@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.Users.User;
+import com.example.demo.models.UsersDTO.RequestNieuweUser;
+import com.example.demo.models.UsersDTO.ResponseUser;
+import com.example.demo.models.UsersDTO.User;
 import com.example.demo.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,10 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/Users")
 public class UserController {
 
-    UserService userService=new UserService();
+    UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/User")
-    public User niewueUser(@RequestBody User NieweUser){
+    public ResponseUser niewueUser(@RequestBody RequestNieuweUser NieweUser){
         if(userService.BestondAlDitEmail(NieweUser.getEmail())){
             throw new IllegalStateException("Er bestaat al deze email");
         }

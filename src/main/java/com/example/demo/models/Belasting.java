@@ -1,7 +1,5 @@
 package com.example.demo.models;
 
-import com.example.demo.models.Users.User;
-
 public class Belasting {
     Long userid;
     String belastingsoort; // inkomen, onroerendezaak, dividend
