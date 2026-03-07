@@ -54,7 +54,7 @@ public class UserControllerTest {
         Mockito.when(userService.niewueUser(user))
                 .thenReturn(user2);
 
-        assertEquals(user.getVoorName(),userController.niewueUser(user).getVoorName());
+        assertEquals(user.getVoorName(),userController.niewueUser(user).getBody().getVoorName());
 
     }
 

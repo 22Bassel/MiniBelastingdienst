@@ -15,12 +15,17 @@ import lombok.*;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String voorName;
-    String achterName;
-    String email;
-    String password;
-    Boolean isAdmin;
+    private Long id;
+    @Column(name = "voorName")
+    private String voorName;
+    @Column(name = "achterName")
+    private String achterName;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "isAdmin")
+    private Boolean isAdmin;
 
     public static UserEntity vanDto(RequestNieuweUser user){
         return UserEntity.builder()

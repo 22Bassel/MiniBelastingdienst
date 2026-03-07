@@ -7,6 +7,8 @@ import com.example.demo.models.UsersDTO.RequestNieuweUser;
 import com.example.demo.models.UsersDTO.ResponseUser;
 import com.example.demo.models.UsersDTO.User;
 
+import java.util.Optional;
+
 @org.springframework.stereotype.Service
 public class UserService {
 
@@ -16,8 +18,6 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    private Database database=new Database();
-
 
     public ResponseUser niewueUser(RequestNieuweUser user){
 
@@ -26,13 +26,20 @@ public class UserService {
         return ResponseUser.NaarDTO(user1);
     }
 
-    public User GetUser(Long id){
-        return database.UserOphalenMetID(id);
+    public ResponseUser GetUser(Long id){
+        Optional<UserEntity> user1= userRepo.findById(id);
+
+        if(user1.isPresent()){
+            return ResponseUser.NaarDTO(user1.get());
+        }
+
+        return null;
+
     }
 
 
     public boolean BestondAlDitEmail(String email) {
-        return database.Emailzoeken(email);
+        return userRepo.existsByEmail(email);
     }
 }
 
