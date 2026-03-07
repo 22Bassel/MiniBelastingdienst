@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
-import com.example.demo.models.UsersDTO.Users.ResponseUser;
+import com.example.demo.models.usersDTO.users.RequestNieuweUser;
+import com.example.demo.models.usersDTO.users.ResponseUser;
 import com.example.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

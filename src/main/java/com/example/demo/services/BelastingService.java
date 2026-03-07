@@ -4,15 +4,14 @@ import com.example.demo.database.BelastingRepo;
 import com.example.demo.database.Database;
 import com.example.demo.database.UserRepo;
 import com.example.demo.models.Belasting;
-import com.example.demo.models.Entities.BelastingEntity;
-import com.example.demo.models.Entities.UserEntity;
-import com.example.demo.models.UsersDTO.GewoneUser;
-import com.example.demo.models.UsersDTO.Users.ResponseUser;
-import com.example.demo.models.UsersDTO.belasting.ResponseBelasting;
+import com.example.demo.models.entities.BelastingEntity;
+import com.example.demo.models.entities.UserEntity;
+import com.example.demo.models.usersDTO.GewoneUser;
+import com.example.demo.models.usersDTO.users.ResponseUser;
+import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

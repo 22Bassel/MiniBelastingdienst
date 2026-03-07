@@ -1,4 +1,4 @@
-package com.example.demo.models.UsersDTO.Users;
+package com.example.demo.models.usersDTO.users;
 
 import lombok.*;
 

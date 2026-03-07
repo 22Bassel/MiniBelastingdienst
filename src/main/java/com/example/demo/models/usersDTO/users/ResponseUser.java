@@ -1,13 +1,10 @@
-package com.example.demo.models.UsersDTO.Users;
+package com.example.demo.models.usersDTO.users;
 
-import com.example.demo.models.Entities.BelastingEntity;
-import com.example.demo.models.Entities.UserEntity;
-import com.example.demo.models.UsersDTO.belasting.ResponseBelasting;
+import com.example.demo.models.entities.UserEntity;
+import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
 import lombok.*;
 
 import java.util.*;
-import java.util.function.Supplier;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Setter

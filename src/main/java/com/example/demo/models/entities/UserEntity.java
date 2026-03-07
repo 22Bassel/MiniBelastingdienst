@@ -1,6 +1,6 @@
-package com.example.demo.models.Entities;
+package com.example.demo.models.entities;
 
-import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
+import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import jakarta.persistence.*;
 import lombok.*;
 

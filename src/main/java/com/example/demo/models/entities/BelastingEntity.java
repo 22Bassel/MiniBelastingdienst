@@ -1,7 +1,7 @@
-package com.example.demo.models.Entities;
+package com.example.demo.models.entities;
 
 
-import com.example.demo.models.UsersDTO.belasting.RequestNieuweBelasting;
+import com.example.demo.models.usersDTO.belasting.RequestNieuweBelasting;
 import jakarta.persistence.*;
 import lombok.*;
 

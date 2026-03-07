@@ -1,4 +1,4 @@
-package com.example.demo.models.UsersDTO.belasting;
+package com.example.demo.models.usersDTO.belasting;
 
 
 import lombok.*;

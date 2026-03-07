@@ -1,10 +1,7 @@
-package com.example.demo.models.UsersDTO.belasting;
+package com.example.demo.models.usersDTO.belasting;
 
-import com.example.demo.models.Entities.BelastingEntity;
-import jakarta.persistence.Column;
+import com.example.demo.models.entities.BelastingEntity;
 import lombok.*;
-
-import java.util.List;
 
 @Setter
 @Getter

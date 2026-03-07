@@ -6,7 +6,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.demo.models.UsersDTO.GewoneUser;
+import com.example.demo.models.usersDTO.GewoneUser;
 
 import java.util.List;
 

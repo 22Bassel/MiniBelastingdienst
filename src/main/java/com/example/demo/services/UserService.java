@@ -1,9 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.database.UserRepo;
-import com.example.demo.models.Entities.UserEntity;
-import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
-import com.example.demo.models.UsersDTO.Users.ResponseUser;
+import com.example.demo.models.entities.UserEntity;
+import com.example.demo.models.usersDTO.users.RequestNieuweUser;
+import com.example.demo.models.usersDTO.users.ResponseUser;
 
 import java.util.Optional;
 
