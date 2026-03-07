@@ -6,6 +6,7 @@ import com.example.demo.models.entities.BelastingEntity;
 import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.users.ResponseUser;
 import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
+import com.example.demo.services.belastingberekenen.Belastingberekenen;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ public class BelastingService {
 
     private final BelastingRepo belastingRepo;
     private final UserRepo userRepo;
+    private final Belastingberekenen inkomenBelastingberekenen;
 
-    public BelastingService(BelastingRepo belastingRepo, UserRepo userRepo) {
+    public BelastingService(BelastingRepo belastingRepo, UserRepo userRepo,Inkomenbelastingberekenen inkomenbelastingberekenen) {
         this.belastingRepo = belastingRepo;
         this.userRepo = userRepo;
+        this.inkomenBelastingberekenen=inkomenbelastingberekenen;
     }
 
     public List<ResponseBelasting> NieuweInkomenBelastingToevoegen(Long id, double inkomen, int jaar) {
@@ -40,7 +43,7 @@ public class BelastingService {
         double belastingbedrag = 0;
         switch (soort) {
             case "Inkomen":
-                belastingbedrag = new Inkomenbelastingberekenen().berekenen(inkomen);
+                belastingbedrag = inkomenBelastingberekenen.berekenen(inkomen);
 
         }
 

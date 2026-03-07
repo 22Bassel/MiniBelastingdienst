@@ -1,5 +1,8 @@
 package com.example.demo.services.belastingberekenen;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Inkomenbelastingberekenen implements Belastingberekenen {
     @Override
     public double berekenen(double geld) {

@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.database.UserRepo;
+import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,84 +27,63 @@ public class UserServiceTest {
 
     @Test
     public void testNiewueUser() {
-        // Test data
-        RequestNieuweUser testUser = new RequestNieuweUser("Sam", "John", "john@example.com", "password",false);
+        // Arrange
+        RequestNieuweUser request = new RequestNieuweUser("John", "Doe", "john@example.com", "password", false);
 
-        // Setup mock
-        when(database.save(any())).thenReturn(testUser);
+        when(database.save(any())).thenReturn(new UserEntity(1L, "John", "Doe", "john@example.com", "password", false,new ArrayList<>()));
 
         // Act
-        ResponseUser result = userService.niewueUser(testUser);
+        ResponseUser result = userService.niewueUser(request);
 
         // Assert
         assertNotNull(result);
-        assertEquals(testUser, result);
+        assertEquals("John", result.getVoorName());
+        assertEquals("john@example.com", result.getEmail());
         verify(database, times(1)).save(any());
     }
-/*
     @Test
-    public void testGetUser() {
-        // Test data
+    public void testGetUser_UserExists() {
+        // Arrange
         Long userId = 1L;
-        User expectedUser = new GewoneUser(userId, "Jane", "jane@example.com", "password");
-
-        // Setup mock
-        when(database.UserOphalenMetID(userId)).thenReturn(expectedUser);
+        UserEntity user = new UserEntity(userId, "John", "Doe", "john@example.com", "password", false,new ArrayList<>());
+        when(database.findById(userId)).thenReturn(Optional.of(user));
 
         // Act
-        User result = userService.GetUser(userId);
+        ResponseUser result = userService.GetUser(userId);
 
         // Assert
         assertNotNull(result);
-        assertEquals(expectedUser, result);
-        verify(database, times(1)).UserOphalenMetID(userId);
+        assertEquals("John", result.getVoorName());
+        assertEquals("john@example.com", result.getEmail());
+        verify(database, times(1)).findById(userId);
     }
-
     @Test
-    public void testGetUser_WhenUserDoesNotExist() {
-        // Test data
+    public void testGetUser_UserDoesNotExist() {
+        // Arrange
         Long userId = 1L;
 
-        // Setup mock
-        when(database.UserOphalenMetID(userId)).thenReturn(null);
+        when(database.findById(userId)).thenReturn(Optional.empty());
 
         // Act
-        User result = userService.GetUser(userId);
+        ResponseUser result = userService.GetUser(userId);
 
         // Assert
         assertNull(result);
-        verify(database, times(1)).UserOphalenMetID(userId);
+        verify(database, times(1)).findById(userId);
     }
 
     @Test
     public void testBestondAlDitEmail_EmailExists() {
-        // Test data
-        String email = "existing@example.com";
-
-        // Setup mock
-        when(database.Emailzoeken(email)).thenReturn(true);
+        // Arrange
+        String email = "john@example.com";
+        when(database.existsByEmail(email)).thenReturn(true);
 
         // Act
         boolean result = userService.BestondAlDitEmail(email);
 
         // Assert
         assertTrue(result);
-        verify(database, times(1)).Emailzoeken(email);
+        verify(database, times(1)).existsByEmail(email);
     }
 
-    @Test
-    public void testBestondAlDitEmail_EmailDoesNotExist() {
-        // Test data
-        String email = "new@example.com";
-
-        // Setup mock
-        when(database.Emailzoeken(email)).thenReturn(false);
-
-        // Act
-        boolean result = userService.BestondAlDitEmail(email);
-
-        // Assert
-        assertFalse(result);
-        verify(database, times(1)).Emailzoeken(email);
-    }*/
 }
