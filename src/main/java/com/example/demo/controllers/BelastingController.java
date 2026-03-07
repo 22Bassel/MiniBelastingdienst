@@ -2,23 +2,30 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Belasting;
 import com.example.demo.services.BelastingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/belasting")
+@RequestMapping("/Belasting")
 public class BelastingController {
 
-    BelastingService belastingService=new BelastingService();
+    BelastingService belastingService;
+
+    public BelastingController(BelastingService belastingService) {
+        this.belastingService = belastingService;
+    }
 
     @PostMapping("/InkomenBelasting/{id}/{inkomen}/{jaar}")
-    public List<Belasting> NieuweInkomenBelasting(@PathVariable Long id,@PathVariable double inkomen,@PathVariable int jaar){
+    public ResponseEntity<?> NieuweInkomenBelasting(@PathVariable Long id, @PathVariable double inkomen, @PathVariable int jaar){
 
         if(belastingService.BestondAlInkomenBelasting(id, jaar)){
-            throw new IllegalStateException("Er bestaat al een belastingaangifte");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message","De belasting in dit jaar bestond al!!"));
         }
 
-        return belastingService.NieuweInkomenBelastingToevoegen(id,inkomen,jaar);
+        return ResponseEntity.status(HttpStatus.CREATED).body(belastingService.NieuweInkomenBelastingToevoegen(id,inkomen,jaar));
     }
 }

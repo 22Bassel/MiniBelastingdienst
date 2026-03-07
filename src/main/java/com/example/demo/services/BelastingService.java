@@ -1,52 +1,67 @@
 package com.example.demo.services;
 
+import com.example.demo.database.BelastingRepo;
 import com.example.demo.database.Database;
+import com.example.demo.database.UserRepo;
 import com.example.demo.models.Belasting;
+import com.example.demo.models.Entities.BelastingEntity;
+import com.example.demo.models.Entities.UserEntity;
 import com.example.demo.models.UsersDTO.GewoneUser;
+import com.example.demo.models.UsersDTO.Users.ResponseUser;
+import com.example.demo.models.UsersDTO.belasting.ResponseBelasting;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BelastingService {
-    private Database database=new Database();
+
+    private final BelastingRepo belastingRepo;
+    private final UserRepo userRepo;
+
+    public BelastingService(BelastingRepo belastingRepo, UserRepo userRepo) {
+        this.belastingRepo = belastingRepo;
+        this.userRepo = userRepo;
+    }
+
+    public List<ResponseBelasting> NieuweInkomenBelastingToevoegen(Long id, double inkomen, int jaar) {
+        Optional<UserEntity> optionalUserEntity = Optional.of(userRepo.findById(id).orElseThrow(() -> new RuntimeException("USER NOT FOUND!")));
+
+        UserEntity user=optionalUserEntity.get();
+        user.addBelastingen(nieuweBelastingmaken("Inkomen", inkomen, jaar));
+
+        userRepo.save(user);
+
+        return ResponseUser.NaarDTO(user).getBelastingen();
+    }
 
 
-    public List<Belasting> NieuweInkomenBelastingToevoegen(Long id,double inkomen,int jaar){
-     GewoneUser user= (GewoneUser) database.UserOphalenMetID(id);
 
-     user.nieuweBelastingMetJaar(nieuweBelastingmaken("inkomen",id,inkomen,jaar));
-
-     database.UserBijwerken(user);
-
-     return user.getBelastingListMetJaar(jaar);
-     };
-
-
-    private Belasting nieuweBelastingmaken(String soort,Long id,double inkomen,int jaar){
-        double belastingbedrag=0;
-        switch (soort){
-            case "inkomen":
-                belastingbedrag=new Inkomenbelastingberekenen().berekenen(inkomen);
+    private BelastingEntity nieuweBelastingmaken(String soort, double inkomen, int jaar) {
+        double belastingbedrag = 0;
+        switch (soort) {
+            case "Inkomen":
+                belastingbedrag = new Inkomenbelastingberekenen().berekenen(inkomen);
 
         }
 
-        return new Belasting(id,soort,jaar,inkomen,belastingbedrag);
+        BelastingEntity belasting=new BelastingEntity();
+        belasting.setBelastingBedrag(belastingbedrag);
+        belasting.setBelastingJaar(jaar);
+        belasting.setInkomem(inkomen);
+        belasting.setBelastingsoort(soort);
+
+        return belasting;
     }
 
 
     public boolean BestondAlInkomenBelasting(Long id, int jaar) {
-        GewoneUser user = (GewoneUser) database.UserOphalenMetID(id);
+        return belastingRepo.existsByUserIdAndBelastingJaarAndBelastingsoort(id, jaar, "Inkomen");
 
-        // al in Database in dit jaar
-        for (Belasting belasting : (ArrayList<Belasting>) user.getBelastingListMetJaar(jaar))
-            if (belasting.getBelastingsoort().equals("inkomen")) {
-                return true;
-            }
 
-        return false;
-    }
     }
 
+}

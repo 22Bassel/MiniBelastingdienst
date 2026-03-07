@@ -1,11 +1,8 @@
 package com.example.demo.services;
 
-import com.example.demo.database.Database;
 import com.example.demo.database.UserRepo;
-import com.example.demo.models.UsersDTO.GewoneUser;
-import com.example.demo.models.UsersDTO.RequestNieuweUser;
-import com.example.demo.models.UsersDTO.ResponseUser;
-import com.example.demo.models.UsersDTO.User;
+import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
+import com.example.demo.models.UsersDTO.Users.ResponseUser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,9 +1,11 @@
 package com.example.demo.models.Entities;
 
-import com.example.demo.models.UsersDTO.RequestNieuweUser;
-import com.example.demo.models.UsersDTO.User;
+import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name ="Users")
@@ -26,6 +28,8 @@ public class UserEntity {
     private String password;
     @Column(name = "isAdmin")
     private Boolean isAdmin;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BelastingEntity> belastingen=new ArrayList<>();
 
     public static UserEntity vanDto(RequestNieuweUser user){
         return UserEntity.builder()
@@ -35,5 +39,11 @@ public class UserEntity {
                 .password(user.getPassword())
                 .isAdmin(user.getIsAdmin())
                 .build();
+    }
+
+
+    public void addBelastingen(BelastingEntity belasting){
+        belasting.setUser(this);
+        belastingen.add(belasting);
     }
 }

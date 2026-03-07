@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.UsersDTO.GewoneUser;
-import com.example.demo.models.UsersDTO.RequestNieuweUser;
-import com.example.demo.models.UsersDTO.ResponseUser;
-import com.example.demo.models.UsersDTO.User;
+import com.example.demo.models.UsersDTO.Users.RequestNieuweUser;
+import com.example.demo.models.UsersDTO.Users.ResponseUser;
 import com.example.demo.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
