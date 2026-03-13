@@ -44,4 +44,14 @@ public class BelastingController {
 
         return ResponseEntity.status(HttpStatus.OK).body(belastingService.GetBelastingen(id));
     }
+
+    @GetMapping("User/{id}/{jaar}")
+    public ResponseEntity<?> getBelastingenVanDezeUserInJaar(@PathVariable Long id,@PathVariable int jaar){
+
+        if(!userService.BestondAlDezeUser(id)){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message","Deze id staat niet in DataBase!! "));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(belastingService.GetBelastingeninJaar(id,jaar));
+    }
 }

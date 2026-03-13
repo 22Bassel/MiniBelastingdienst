@@ -10,6 +10,7 @@ import com.example.demo.services.belastingberekenen.Belastingberekenen;
 import com.example.demo.services.belastingberekenen.Inkomenbelastingberekenen;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,17 @@ public class BelastingService {
         Optional<UserEntity> optionalUserEntity = Optional.of(userRepo.findById(id).orElseThrow(() -> new RuntimeException("USER NOT FOUND!")));
 
         return ResponseUser.NaarDTO(optionalUserEntity.get()).getBelastingen();
+    }
+
+    public List<ResponseBelasting> GetBelastingeninJaar(Long id, int jaar){
+
+        Optional<UserEntity> optionalUserEntity = Optional.of(userRepo.findById(id).orElseThrow(() -> new RuntimeException("USER NOT FOUND!")));
+
+        return optionalUserEntity.get().getBelastingen().stream()
+                .filter(b->b.getBelastingJaar()==jaar)
+                .map(ResponseBelasting::NaarDTO)
+                .toList();
+
     }
 
 }
