@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,7 +36,14 @@ public class UserController {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message","Deze id staat niet in DataBase!! "));
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+    }
+
+    @GetMapping("/AlleUsers")
+    public ResponseEntity<?> getAlleUsers(){
+        List<ResponseUser> responseUsers= userService.GetAlleUsers();
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseUsers);
     }
 
 }

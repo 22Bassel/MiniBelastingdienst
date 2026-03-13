@@ -5,7 +5,9 @@ import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 public class UserService {
@@ -38,6 +40,10 @@ public class UserService {
 
     public boolean BestondAlDitEmail(String email) {
         return userRepo.existsByEmail(email);
+    }
+
+    public List<ResponseUser>  GetAlleUsers(){
+        return userRepo.findAll().stream().map(ResponseUser::NaarDTO).collect(Collectors.toList());
     }
 }
 
