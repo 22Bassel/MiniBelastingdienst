@@ -45,5 +45,13 @@ public class UserService {
     public List<ResponseUser>  GetAlleUsers(){
         return userRepo.findAll().stream().map(ResponseUser::NaarDTO).collect(Collectors.toList());
     }
+
+    public boolean BestondAlDezeUser(Long id){
+        return userRepo.existsById(id);
+    }
+
+    public void DeleteUser(Long id){
+        userRepo.deleteById(id);
+    }
 }
 

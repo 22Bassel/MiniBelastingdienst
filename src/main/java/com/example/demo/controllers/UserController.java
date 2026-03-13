@@ -46,4 +46,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responseUsers);
     }
 
+    @DeleteMapping("/Delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id){
+
+        if(!userService.BestondAlDezeUser(id)){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message","Deze id staat niet in DataBase!! "));
+        }
+        userService.DeleteUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message","Deze User is verwijderd!!"));
+    }
+
 }
