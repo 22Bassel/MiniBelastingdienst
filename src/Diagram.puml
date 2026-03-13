@@ -2,12 +2,12 @@
 
 ' *** controlers ***
 class UserController{
-+niewueUser()
-+getUser()
+ + niewueUser(NieweUser: RequestNieuweUser): ResponseEntity
+  + getUser(id: Long): ResponseEntity
 }
 
 class BelastingController{
-+NieuweInkomenBelasting()
+ + NieuweInkomenBelasting(id: Long, inkomen: Double, jaar: Int): ResponseEntity
 }
 
 '-----------------
@@ -17,80 +17,102 @@ class BelastingController{
 ' *** Services ***
 class UserService{
 +niewueUser()
-+GetUser()
-+BestaatAlEmail()
+ + niewueUser(user: RequestNieuweUser): ResponseUser
+ + GetUser(id: Long): ResponseUser
+ + BestondAlDitEmail(email: String): Boolean
 }
 
 class BelastingService{
-+NieuweInkomenBelastingToevoegen()
--nieuweBelastingmaken()
-+BestaatAlInkomenBelasting
+ + NieuweInkomenBelastingToevoegen(id: Long, inkomen: Double, jaar: Int): List<ResponseBelasting>
+ + BestondAlInkomenBelasting(id: Long, jaar: Int): Boolean
+ -nieuweBelastingmaken()
 }
 
 '*** package belastingbereken ***
-interface Belastingbereken{
-berekenen()
+interface Belastingberekenen{
++ berekenen(geld: Double): Double
 }
 
 class Inkomenbelastingberekenen{
-berekenen()
++ berekenen(geld: Double): Double
 }
 '-----------------
 
 
 
 ' *** models ***
-interface User{
-+id
-+name
-+email
-+password
-+isAdmin
-
+' Entities
+class UserEntity {
+  - id: Long
+  - voorNaam: String
+  - achterNaam: String
+  - email: String
+  - isAdmin: Boolean
+  - belastingen: List<BelastingEntity>
+}
+class BelastingEntity {
+  - id: Long
+  - user: UserEntity
+  - belastingsoort: String
+  - belastingJaar: Int
+  - inkomen: Double
+  - belastingBedrag: Double
 }
 
-class Admin{
+' DTOs
+class RequestNieuweUser {
+  - voorName: String
+  - achterName: String
+  - email: String
+  - password: String
+  - isAdmin: Boolean
 }
-
-class GewoneUser{
-  -belastingenPerJaar:Map<Integer,List<Belasting>>
-
-  +nieuweBelastingMetJaar()
-  +getBelastingListMetJaar()
-  +setBelastingToevoegen()
-
+class RequestNieuweBelasting {
+  - userid: Long
+  - belastingsoort: String
+  - belastingJaar: Int
+  - inkomem: Double
+  - belastingBedrag: Double
 }
-
-class Belasting{
- -userid;
- -belastingsoort;
- -belastingJaar;
- -inkomem;
- -belastingBedrag;
+class ResponseUser {
+  + NaarDTO(user: UserEntity): ResponseUser
+}
+class ResponseBelasting {
+  + NaarDTO(belasting: BelastingEntity): ResponseBelasting
 }
 
 '-----------------
 
 
 ' *** DataBase ***
-package DataBase{}
+class BelastingRepo {
+  + existsByUserIdAndBelastingJaarAndBelastingsoort(userId: Long, jaar: Int, soort: String): Boolean
+}
+
+class UserRepo {
+  + existsByEmail(email: String): Boolean
+}
 
 ' *** Relations ***
-User--|>GewoneUser
-User--|>Admin
+UserController --> UserService
+BelastingController --> BelastingService
 
-GewoneUser "1" -- "1..*" Belasting : bevat
+UserService  --> UserRepo
+BelastingService --> BelastingRepo
+BelastingService --> UserRepo
 
-UserController-->UserService
-BelastingController-->BelastingService
+UserEntity "1" -- "0..*" BelastingEntity : heeft
+BelastingEntity "1" -- "1" UserEntity : behoort tot
 
-UserService..>User
-BelastingService..>Belasting
+UserService "1" -- "1" UserEntity : werkt met
+BelastingService "1" -- "1" BelastingEntity : werkt met
 
-Belastingbereken..|>Inkomenbelastingberekenen
-BelastingService-->Belastingbereken
+UserController -- RequestNieuweUser : gebruikt
+UserController --  ResponseUser : retourneert
+BelastingController -- RequestNieuweBelasting : gebruikt
+BelastingController --  ResponseBelasting : retourneert
 
-UserService-->DataBase
-BelastingService-->DataBase
+BelastingService "1" -- "1" Belastingberekenen : gebruikt
+Belastingberekenen <|-- Inkomenbelastingberekenen : implementeert
 
 @enduml
