@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
 import com.example.demo.services.BelastingService;
+import com.example.demo.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +28,10 @@ public class BelastingControllerTest {
 
     @Mock
     BelastingService belastingService;
+
+    @Mock
+    UserService userService;
+
 
     @Test
     public void NieuweInkomenBelastingTest_BelastingBestaatAl() {
@@ -74,6 +80,83 @@ public class BelastingControllerTest {
         verify(belastingService, times(1)).BestondAlInkomenBelasting(userId, jaar);
         verify(belastingService, times(1)).NieuweInkomenBelastingToevoegen(userId, inkomen, jaar);
     }
+
+
+    @Test
+    public void testGetAlleBelastingVanDezeUser_Success() {
+        // Arrange
+        Long userId = 1L;
+        List<ResponseBelasting> mockBelastingen = new ArrayList<>();
+               mockBelastingen.add(new ResponseBelasting("Inkomen", 2023, 50000.0, 10000.0));
+               mockBelastingen.add(new ResponseBelasting("Inkomen", 2024, 60000.0, 12000.0));
+
+        when(userService.BestondAlDezeUser(userId)).thenReturn(true);
+        when(belastingService.GetBelastingen(userId)).thenReturn(mockBelastingen);
+
+        // Act
+        ResponseEntity<List<ResponseBelasting>> response = (ResponseEntity<List<ResponseBelasting>>) belastingController.getAlleBelastingVanDezeUser(userId);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(mockBelastingen, response.getBody());
+        verify(belastingService, times(1)).GetBelastingen(userId);
+    }
+
+    @Test
+    public void testGetAlleBelastingVanDezeUser_UserNotFound() {
+        // Arrange
+        Long userId = 1L;
+        when(userService.BestondAlDezeUser(userId)).thenReturn(false);
+
+        // Act
+        ResponseEntity<List<ResponseBelasting>> response = (ResponseEntity<List<ResponseBelasting>>) belastingController.getAlleBelastingVanDezeUser(userId);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        verify(belastingService, times(0)).GetBelastingen(userId);
+    }
+
+    @Test
+    public void testGetBelastingenVanDezeUserInJaar_Success() {
+        // Arrange
+        Long userId = 1L;
+        int jaar = 2023;
+        List<ResponseBelasting> mockBelastingen = Arrays.asList(
+                new ResponseBelasting("Inkomen", 2023, 50000.0, 10000.0)
+        );
+        when(userService.BestondAlDezeUser(userId)).thenReturn(true);
+        when(belastingService.GetBelastingeninJaar(userId, jaar)).thenReturn(mockBelastingen);
+
+        // Act
+        ResponseEntity<List<ResponseBelasting>> response = (ResponseEntity<List<ResponseBelasting>>) belastingController.getBelastingenVanDezeUserInJaar(userId, jaar);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(mockBelastingen, response.getBody());
+        verify(belastingService, times(1)).GetBelastingeninJaar(userId, jaar);
+    }
+
+    @Test
+    public void testGetBelastingenVanDezeUserInJaar_BelastingenNotFound() {
+        // Arrange
+        Long userId = 1L;
+        int jaar = 2023;
+
+        when(userService.BestondAlDezeUser(userId)).thenReturn(false);
+
+        // Act
+        ResponseEntity<List<ResponseBelasting>> response = (ResponseEntity<List<ResponseBelasting>>) belastingController.getBelastingenVanDezeUserInJaar(userId, jaar);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+        verify(belastingService, times(0)).GetBelastingeninJaar(userId, jaar);
+    }
+
 
 
 }
