@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -69,6 +71,58 @@ public class UserControllerTest {
         // Verify service methods were called
         verify(userService, times(1)).BestondAlDitEmail("b@gmail.com");
         verify(userService, times(1)).niewueUser(requestUser);
+    }
+
+
+    @Test
+    public void testGetAllUsers_Success() {
+        // Arrange
+        List<ResponseUser> mockUsers = Arrays.asList(
+                new ResponseUser(1L, "John", "Doe", "john@example.com", false, new ArrayList<>()),
+                new ResponseUser(2L, "Jane", "Smith", "jane@example.com", true, new ArrayList<>())
+        );
+
+        when(userService.GetAlleUsers()).thenReturn(mockUsers);
+
+        // Act
+        ResponseEntity<List<ResponseUser>> response = (ResponseEntity<List<ResponseUser>>) userController.getAlleUsers();
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(mockUsers, response.getBody());
+        verify(userService, times(1)).GetAlleUsers();
+    }
+
+
+    @Test
+    public void testDeleteUser_Success() {
+        // Arrange
+        Long userId = 1L;
+        when(userService.BestondAlDezeUser(userId)).thenReturn(true);
+
+        // Act
+        ResponseEntity<?> response = userController.deleteUser(userId);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(userService, times(1)).DeleteUser(userId);
+    }
+
+    @Test
+    public void testDeleteUser_UserNotFound() {
+        // Arrange
+        Long userId = 1L;
+        when(userService.BestondAlDezeUser(userId)).thenReturn(false);
+
+        // Act
+        ResponseEntity<?> response = userController.deleteUser(userId);
+
+        // Assert
+        assertNotNull(response);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        verify(userService, times(0)).DeleteUser(userId);
     }
 
 }
