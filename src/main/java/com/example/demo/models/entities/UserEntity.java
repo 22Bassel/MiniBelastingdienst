@@ -1,5 +1,6 @@
 package com.example.demo.models.entities;
 
+import com.example.demo.enums.Role;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,8 +27,9 @@ public class UserEntity {
     private String email;
     @Column(name = "PASSWORD")
     private String password;
-    @Column(name = "ISADMIN")
-    private Boolean isAdmin;
+    @Column(name = "ROLE")
+    @Enumerated(EnumType.STRING)
+    private Role Role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BelastingEntity> belastingen=new ArrayList<>();
 
@@ -37,7 +39,7 @@ public class UserEntity {
                 .achterNaam(user.getAchterName())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .isAdmin(user.getIsAdmin())
+                .Role(user.getRole())
                 .build();
     }
 

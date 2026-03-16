@@ -1,11 +1,11 @@
-INSERT INTO USERS (voorNaam, achterNaam, email, password, isAdmin)
+INSERT INTO USERS (voorNaam, achterNaam, email, password, role)
 VALUES
-    ('Adam', 'User', 'admin@example.com', 'password123', false),
-    ('Student', 'Van Den Berg', 'student@example.com', 'student123', false),
-    ('Business', 'Owner', 'business@example.com', 'businesspass', false),
-    ('Freelancer', 'Smith', 'freelancer@example.com', 'freelance123', false),
-    ('Retired', 'Johnson', 'retired@example.com', 'retiredpass', false),
-    ('Regular', 'User', 'user@example.com', 'password456', false);
+    ('Adam', 'User', 'admin@example.com', 'password123', 'USER'),
+    ('Student', 'Van Den Berg', 'student@example.com', 'student123', 'USER'),
+    ('Business', 'Owner', 'business@example.com', 'businesspass', 'USER'),
+    ('Freelancer', 'Smith', 'freelancer@example.com', 'freelance123', 'USER'),
+    ('Retired', 'Johnson', 'retired@example.com', 'retiredpass', 'USER'),
+    ('Regular', 'User', 'user@example.com', 'password456', 'USER');
 
 -- Insert sample belastingen (tax records)
 INSERT INTO BELASTINGEN (userid, belastingsoort, belastingJaar, inkomen, belastingBedrag)

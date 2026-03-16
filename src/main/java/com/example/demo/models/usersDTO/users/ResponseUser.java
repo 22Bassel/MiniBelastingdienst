@@ -1,5 +1,6 @@
 package com.example.demo.models.usersDTO.users;
 
+import com.example.demo.enums.Role;
 import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.belasting.ResponseBelasting;
 import lombok.*;
@@ -17,7 +18,7 @@ public class ResponseUser {
     String voorName;
     String achterName;
     String email;
-    Boolean isAdmin;
+    Role role;
     List<ResponseBelasting> belastingen;
 
     public static ResponseUser NaarDTO(UserEntity user){
@@ -26,7 +27,7 @@ public class ResponseUser {
                 .voorName(user.getVoorNaam())
                 .achterName(user.getAchterNaam())
                 .email(user.getEmail())
-                .isAdmin(user.getIsAdmin())
+                .role(user.getRole())
                 .belastingen(Optional.ofNullable(user.getBelastingen())
                         .orElseGet(Collections::emptyList)
                         .stream()

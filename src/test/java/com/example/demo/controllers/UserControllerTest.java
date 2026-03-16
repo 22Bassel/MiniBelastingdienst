@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.enums.Role;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
 import com.example.demo.services.UserService;
@@ -33,7 +34,7 @@ public class UserControllerTest {
     @Test
     public void NiewueUserTest_EmailBestaatAl() {
         // Arrange
-        RequestNieuweUser user = new RequestNieuweUser("a", "b", "b@gmail.com", "c", false);
+        RequestNieuweUser user = new RequestNieuweUser("a", "b", "b@gmail.com", "c", Role.User);
 
         // Mock service to return true (email exists)
         when(userService.BestondAlDitEmail(anyString())).thenReturn(true);
@@ -51,8 +52,8 @@ public class UserControllerTest {
     @Test
     public void NiewueUserTest_NieuweUserToevoegen() {
         // Arrange
-        RequestNieuweUser requestUser = new RequestNieuweUser("a", "b", "b@gmail.com", "c", false);
-        ResponseUser expectedUser = new ResponseUser(1L, "a", "b", "b@gmail.com", false,new ArrayList<>());
+        RequestNieuweUser requestUser = new RequestNieuweUser("a", "b", "b@gmail.com", "c", Role.User);
+        ResponseUser expectedUser = new ResponseUser(1L, "a", "b", "b@gmail.com", Role.User,new ArrayList<>());
 
         // Mock service to return false (email does not exist)
         when(userService.BestondAlDitEmail(anyString())).thenReturn(false);
@@ -78,8 +79,8 @@ public class UserControllerTest {
     public void testGetAllUsers_Success() {
         // Arrange
         List<ResponseUser> mockUsers = Arrays.asList(
-                new ResponseUser(1L, "John", "Doe", "john@example.com", false, new ArrayList<>()),
-                new ResponseUser(2L, "Jane", "Smith", "jane@example.com", true, new ArrayList<>())
+                new ResponseUser(1L, "John", "Doe", "john@example.com", Role.User, new ArrayList<>()),
+                new ResponseUser(2L, "Jane", "Smith", "jane@example.com", Role.User, new ArrayList<>())
         );
 
         when(userService.GetAlleUsers()).thenReturn(mockUsers);

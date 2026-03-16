@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.database.UserRepo;
+import com.example.demo.enums.Role;
 import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
@@ -28,9 +29,9 @@ public class UserServiceTest {
     @Test
     public void testNiewueUser() {
         // Arrange
-        RequestNieuweUser request = new RequestNieuweUser("John", "Doe", "john@example.com", "password", false);
+        RequestNieuweUser request = new RequestNieuweUser("John", "Doe", "john@example.com", "password", Role.User);
 
-        when(database.save(any())).thenReturn(new UserEntity(1L, "John", "Doe", "john@example.com", "password", false,new ArrayList<>()));
+        when(database.save(any())).thenReturn(new UserEntity(1L, "John", "Doe", "john@example.com", "password", Role.User,new ArrayList<>()));
 
         // Act
         ResponseUser result = userService.niewueUser(request);
@@ -45,7 +46,7 @@ public class UserServiceTest {
     public void testGetUser_UserExists() {
         // Arrange
         Long userId = 1L;
-        UserEntity user = new UserEntity(userId, "John", "Doe", "john@example.com", "password", false,new ArrayList<>());
+        UserEntity user = new UserEntity(userId, "John", "Doe", "john@example.com", "password", Role.User,new ArrayList<>());
         when(database.findById(userId)).thenReturn(Optional.of(user));
 
         // Act

@@ -1,5 +1,6 @@
 package com.example.demo.models.usersDTO.users;
 
+import com.example.demo.enums.Role;
 import lombok.*;
 
 @Setter
@@ -13,6 +14,6 @@ public class RequestNieuweUser{
     String achterName;
     String email;
     String password;
-    Boolean isAdmin;
+    Role Role;
 
 }
