@@ -5,6 +5,7 @@ import com.example.demo.models.usersDTO.users.ResponseUser;
 import com.example.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.niewueUser(NieweUser));
     }
 
+    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id){
         ResponseUser responseUser= userService.GetUser(id);
@@ -39,6 +41,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responseUser);
     }
 
+
     @GetMapping("/AlleUsers")
     public ResponseEntity<?> getAlleUsers(){
         List<ResponseUser> responseUsers= userService.GetAlleUsers();
@@ -46,6 +49,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responseUsers);
     }
 
+    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
     @DeleteMapping("/Delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
 

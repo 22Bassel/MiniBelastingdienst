@@ -1,6 +1,6 @@
 INSERT INTO USERS (voorNaam, achterNaam, email, password, role)
 VALUES
-    ('Adam', 'User', 'admin@example.com', 'password123', 'USER'),
+    ('Adam', 'User', 'admin@example.com', 'password123', 'Admin'),
     ('Student', 'Van Den Berg', 'student@example.com', 'student123', 'USER'),
     ('Business', 'Owner', 'business@example.com', 'businesspass', 'USER'),
     ('Freelancer', 'Smith', 'freelancer@example.com', 'freelance123', 'USER'),

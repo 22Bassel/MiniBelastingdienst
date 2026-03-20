@@ -6,6 +6,7 @@ import com.example.demo.services.BelastingService;
 import com.example.demo.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class BelastingController {
         this.userService=userService;
     }
 
+    @PreAuthorize("#id == authentication.principal.id")
     @PostMapping("/InkomenBelasting/{id}/{inkomen}/{jaar}")
     public ResponseEntity<?> NieuweInkomenBelasting(@PathVariable Long id, @PathVariable double inkomen, @PathVariable int jaar){
 
@@ -35,6 +37,7 @@ public class BelastingController {
     }
 
 
+    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
     @GetMapping("User/{id}")
     public ResponseEntity<?> getAlleBelastingVanDezeUser(@PathVariable Long id){
 
@@ -45,6 +48,7 @@ public class BelastingController {
         return ResponseEntity.status(HttpStatus.OK).body(belastingService.GetBelastingen(id));
     }
 
+    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
     @GetMapping("User/{id}/{jaar}")
     public ResponseEntity<?> getBelastingenVanDezeUserInJaar(@PathVariable Long id,@PathVariable int jaar){
 
