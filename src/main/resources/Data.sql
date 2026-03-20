@@ -1,11 +1,11 @@
 INSERT INTO USERS (voorNaam, achterNaam, email, password, role)
 VALUES
-    ('Adam', 'User', 'admin@example.com', 'password123', 'Admin'),
-    ('Student', 'Van Den Berg', 'student@example.com', 'student123', 'USER'),
-    ('Business', 'Owner', 'business@example.com', 'businesspass', 'USER'),
-    ('Freelancer', 'Smith', 'freelancer@example.com', 'freelance123', 'USER'),
-    ('Retired', 'Johnson', 'retired@example.com', 'retiredpass', 'USER'),
-    ('Regular', 'User', 'user@example.com', 'password456', 'USER');
+    ('Adam', 'User', 'admin@example.com', '$2a$10$iletpdKiTRfS9evszK8tQ.oMSWbhy1FPlYup/Z.QpWCwdiIzK3oXW', 'Admin'),
+    ('Student', 'Van Den Berg', 'student@example.com', '$2a$10$qgfM9AimMHe1GDG9yGoIg.S6c2o3vPmPhAV2DdpUFAtKh5fUuc52u', 'USER'),
+    ('Business', 'Owner', 'business@example.com', '$2a$10$I0hILdkFYlfQmPb7dPQfPeIUQebt9zQXc0tO8CKFGczTv1oqagsrm', 'USER'),
+    ('Freelancer', 'Smith', 'freelancer@example.com', '$2a$10$XHhN17WB5rkACG.oa/x0aeb4H7hD8B.IKnqu5lC9/e4KpjVDV6ALC', 'USER'),
+    ('Retired', 'Johnson', 'retired@example.com', '$2a$10$clM6da.0QP2VNwQY/WFlDeYaB0wc6goHiFdypr6aicMeAa3IbefP.', 'USER'),
+    ('Regular', 'User', 'user@example.com', '$2a$10$W.SXbElstMrzRfI.OU.oy.6oUQJ5H/QrvVSznFyqnRLmQFYk4MMNe', 'USER');
 
 -- Insert sample belastingen (tax records)
 INSERT INTO BELASTINGEN (userid, belastingsoort, belastingJaar, inkomen, belastingBedrag)

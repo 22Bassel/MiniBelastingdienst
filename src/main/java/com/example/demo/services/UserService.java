@@ -4,6 +4,7 @@ import com.example.demo.database.UserRepo;
 import com.example.demo.models.entities.UserEntity;
 import com.example.demo.models.usersDTO.users.RequestNieuweUser;
 import com.example.demo.models.usersDTO.users.ResponseUser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +14,18 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo,PasswordEncoder passwordEncoder)
+    {
         this.userRepo = userRepo;
+        this.passwordEncoder=passwordEncoder;
     }
 
 
     public ResponseUser niewueUser(RequestNieuweUser user){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         UserEntity user1= userRepo.save(UserEntity.vanDto(user));
 

@@ -1,0 +1,9 @@
+
+ID : EMAIL                 : PASSWORD     : ROLE
+-------------------------------------------------
+1 : admin@example.com      : password123  : Admin
+2 : student@example.com    : student123   : USER
+3 : business@example.com   : businesspass : USER
+4 : freelancer@example.com : freelance123 : USER
+5 : retired@example.com    : retiredpass  : USER
+6 : user@example.com       : password456  : USER

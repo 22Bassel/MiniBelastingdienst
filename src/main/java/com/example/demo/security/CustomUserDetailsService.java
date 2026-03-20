@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         CustomUserDetails customUserDetails= CustomUserDetails.builder()
                 .id(userEntity.getId())
                 .username(userEntity.getEmail())
-                .password("{noop}" + userEntity.getPassword()) // normaal
+                .password(userEntity.getPassword())
                 .authorities(List.of(new SimpleGrantedAuthority("ROLE_"+userEntity.getRole().name().toUpperCase())))
                 .build();
 
