@@ -37,7 +37,7 @@ public class BelastingController {
     }
 
 
-    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
+    @PreAuthorize("#id == authentication.principal.id or hasRole('ADMIN')")
     @GetMapping("User/{id}")
     public ResponseEntity<?> getAlleBelastingVanDezeUser(@PathVariable Long id){
 
@@ -48,7 +48,7 @@ public class BelastingController {
         return ResponseEntity.status(HttpStatus.OK).body(belastingService.GetBelastingen(id));
     }
 
-    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
+    @PreAuthorize("#id == authentication.principal.id or hasRole('ADMIN')")
     @GetMapping("User/{id}/{jaar}")
     public ResponseEntity<?> getBelastingenVanDezeUserInJaar(@PathVariable Long id,@PathVariable int jaar){
 

@@ -29,7 +29,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.niewueUser(NieweUser));
     }
 
-    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
+    @PreAuthorize("#id == authentication.principal.id or hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id){
         ResponseUser responseUser= userService.GetUser(id);
@@ -49,7 +49,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(responseUsers);
     }
 
-    @PreAuthorize("#id == authentication.principal.id or hasRole('Admin')")
+    @PreAuthorize("#id == authentication.principal.id or hasRole('ADMIN')")
     @DeleteMapping("/Delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
 
